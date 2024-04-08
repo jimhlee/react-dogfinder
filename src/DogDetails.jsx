@@ -1,7 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
+import "./DogDetails.css";
 
 /** Component for a dog
  *
@@ -9,27 +10,39 @@ import { Link } from "react-router-dom";
  *
  * Routelist -> {Doglist, DogDetails }
  */
-function DogDetails({ dogs }) {
-    const { name } = useParams();
-    const dog = dogs.filter(dog => dog.name === name)[0];
-    console.log(dog)
+function DogDetails({dogs}) {
+  const {name} = useParams();
+  const dog = dogs.filter((dog) => dog.src === name.toLowerCase())[0];
 
-    // TODO: write a not found component
-    if (!dog) {
-        navigate('/NotFound')
-    }
-    const pic = `../public/${src}.jpg`;
+  const pic = dog ? `../public/${dog.src}.jpg` : "";
 
+  /**
+   * Sets up dog details for rendering
+   */
+  function renderDogDetails() {
     return (
-        <div className="dogDetails">
-            <h1>{name}</h1>
-            <img src={pic} alt="Picture of a dog" />
-            <h3>{facts}</h3>
-            <h3>{age}</h3>
-            <Link to={'/'} > Go Back </Link>
+      <div>
+        <h1>{dog.name}</h1>
+        <img src={pic} alt="Picture of a dog" />
+        <div className="DogDetails-facts">
+          <h3>
+            <i>Facts:</i> {dog.facts}
+          </h3>
+          <h3>
+            <i>Age:</i> {dog.age}
+          </h3>
         </div>
 
+        <Link to={"/"}> Go Back </Link>
+      </div>
     );
+  }
+
+  return (
+    <div className="DogDetails">
+      {!dog ? "This dog doesn't exist" : renderDogDetails()}
+    </div>
+  );
 }
 
 export default DogDetails;

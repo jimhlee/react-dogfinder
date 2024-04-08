@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import React, {useState} from "react";
+import {BrowserRouter} from "react-router-dom";
 import Routelist from "./Routelist";
 import "./App.css";
 
 const DB_URL = "http://localhost:5001/dogs";
 const INITIAL_STATE = await getDogs();
 
+// TODO: Fetch data should go inside App component function
 /** Fetches dog data from API */
 async function getDogs() {
   const response = await fetch(DB_URL);
@@ -18,7 +19,7 @@ async function getDogs() {
  * State: dogs [{name, age, src, facts}, ...]
  *
  * App -> Routelist
-*/
+ */
 function App() {
   const [dogs, setDogs] = useState(INITIAL_STATE);
 

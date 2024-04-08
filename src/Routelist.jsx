@@ -1,17 +1,23 @@
 import React from "react";
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import Doglist from "./Doglist";
 import DogDetails from "./DogDetails";
-// import dogs from db.json
 
-function Routelist() {
-  return (
-    <Routes>
-      <Route element={<Doglist />} path="/dogs" />
-      <Route element={<DogDetails />} path="/dogs/:name" />
-    </Routes>
-  );
+/** Main routes
+ *
+ * Props: dogs [{name, age, src, facts}, ...]
+ *
+ * App -> Routelist -> {Doglist, DogDetails }
+*/
+function Routelist({ dogs }) {
+    return (
+        <Routes>
+            <Route element={<Doglist dogs={dogs} />} path="/dogs" />
+            <Route element={<DogDetails dogs={dogs} />} path="/dogs/:name" />
+            <Route path="*" element={<Navigate to="/dogs" /> } />
+        </Routes>
+    );
 }
 
 export default Routelist;

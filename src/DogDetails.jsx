@@ -12,9 +12,11 @@ import "./DogDetails.css";
  */
 function DogDetails({dogs}) {
   const {name} = useParams();
+//  TODO: change to dog.name.toLowerCase
   const dog = dogs.filter((dog) => dog.src === name.toLowerCase())[0];
 
-  const pic = dog ? `../public/${dog.src}.jpg` : "";
+//   public folder means this doesn't need a filepath
+  const pic = dog ? `/${dog.src}.jpg` : "";
 
   /**
    * Sets up dog details for rendering
@@ -26,6 +28,7 @@ function DogDetails({dogs}) {
         <img src={pic} alt="Picture of a dog" />
         <div className="DogDetails-facts">
           <h3>
+            {/* TODO: map over facts, give each own line, will need key, use idx */}
             <i>Facts:</i> {dog.facts}
           </h3>
           <h3>
